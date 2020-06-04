@@ -171,94 +171,160 @@ paths:
       summary: Create Bill
       tags:
         - create_bill
-      responses: {}
+      responses:
+        '200':
+          description: |-
+            {
+              "response":"00",
+              "url":"https://www.qlicknpay.com/receiver-disp?34-INV0001-024939-    iXO",
+            }
+        '400':
+          description: |-
+            {
+              "response":"99",
+              "msg":"Fail to created bill.",
+            }
       operationId: post-v1-create_bill
       description: 'You can use this API to retrieve specific payment URL. This URL is only for a single payment and no have no time limit. '
       parameters:
         - schema:
-            type: string
+            type: integer
+            example: 10010
           in: query
           name: merchant_id
+          description: Your merchant ID
+          required: true
         - schema:
             type: string
+            pattern: '^[a-zA-Z0-9]+$'
+            example: FS789
           in: query
           name: invoice
+          description: Unique invoice number
+          required: true
         - schema:
-            type: string
+            type: number
+            format: float
+            minimum: 1.5
+            example: 150
           in: query
           name: amount
+          description: Final amount to be paid by buyer
+          required: true
         - schema:
             type: string
+            example: Parking Fee
           in: query
           name: payment_desc
+          description: Purpose of payment
+          required: true
         - schema:
             type: string
+            example: fc85b97551f5a2b8bf28d916f2f8055d
           in: query
           name: hash
+          description: "The secure hash string to validate the payment request sent through our Payment Gateway. Follwing the format of the hash string is constructed as follows encryption method:\nmd5(YOURAPIKEY|merchant_id|invoice|amount|payment_desc) "
+          required: true
         - schema:
             type: string
+            example: John
           in: query
           name: buyer_name
+          description: "Buyer's name"
         - schema:
             type: string
+            format: email
+            example: John@domain.com
           in: query
           name: buyer_email
+          description: "Buyer's email. Buyer will receive payment notification at this address if specified"
         - schema:
             type: string
+            pattern: "^(\\+?6?01)[0-46-9]-*[0-9]{7,8}$"
+            example: '+6017123123'
           in: query
           name: phone
+          description: "Buyer's phone number"
         - schema:
             type: string
+            example: '10-3, 3rd Floor Jln PJU 5/9'
           in: query
           name: add_line_1
+          description: "Buyer's address line 1"
         - schema:
             type: string
+            example: Dataran Sunway Kota Damansara
           in: query
           name: add_line_2
+          description: "Buyer's address line 2"
         - schema:
             type: string
+            example: '47810'
           in: query
           name: postcode
+          description: "Buyer's postcode"
         - schema:
             type: string
+            example: Petaling Jaya
           in: query
           name: city
+          description: "Buyer's city location"
         - schema:
             type: string
+            example: Selangor
           in: query
           name: state
+          description: "Buyer's state location"
         - schema:
             type: string
+            example: Comment Here For Merchant Reference
           in: query
           name: comment
+          description: "Buyer's additional comments / notes on the purchase"
         - schema:
             type: string
+            format: uri
+            example: 'https://www.example.com/callback_url_be'
           in: query
           name: callback_url_be
+          description: Callback URL for your back-end process
         - schema:
             type: string
+            format: uri
+            example: 'https://www.example.com/callback_fe_succ'
           in: query
           name: callback_url_fe_succ
+          description: Callback URL for your front-end successful transaction process
         - schema:
             type: string
+            example: 'https://www.example.com/callback_url_fe_fail'
           in: query
           name: callback_url_fe_fail
+          description: Callback URL for your front-end failed transaction process
         - schema:
             type: string
+            example: 'variable1|variable2|variable3|variable4'
           in: query
           name: baggage_variable
+          description: Name of the variable
         - schema:
             type: string
+            example: Payment Title
           in: query
-          name: 'header_title '
+          name: header_title
+          description: Modify your company name at payment gateway pages
         - schema:
             type: string
+            example: contact@gmail.com
           in: query
           name: header_email
+          description: Modify your company email address at payment gateway pages
         - schema:
             type: string
+            example: '0123456789'
           in: query
           name: header_phone
+          description: Modify your company phone number at payment gateway pages
     parameters: []
 components:
   schemas: {}
