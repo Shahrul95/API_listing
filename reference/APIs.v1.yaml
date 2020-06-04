@@ -50,33 +50,43 @@ paths:
           required: true
         - schema:
             type: string
+            minLength: 1
+            maxLength: 1000
           in: query
           name: payment_desc
           description: Purpose of payment
           required: true
         - schema:
             type: string
+            pattern: '^[a-zA-Z0-9]+$'
+            example: dc8e364d222d6025cbc505674b7012df
           in: query
           name: hash
-          description: The secure hash string to validate the payment request sent through our Payment Gateway
+          description: "The secure hash string to validate the payment request sent through our Payment Gateway. Follwing the format of the hash string is constructed as follows encryption method:\nmd5(YOURAPIKEY|merchant_id|invoice|amount|payment_desc) "
           required: true
         - schema:
             type: string
+            example: John
           in: query
           name: buyer_name
           description: "Buyer's name"
         - schema:
             type: string
+            example: john@domain.com
+            format: email
           in: query
           name: buyer_email
           description: "Buyer's email. Buyer will receive payment notification at this address if specified"
         - schema:
             type: string
+            pattern: "^(\\+?6?01)[0-46-9]-*[0-9]{7,8}$"
+            example: '+60171234567'
           in: query
           name: phone
           description: "Buyer's phone number"
         - schema:
             type: string
+            example: ''
           in: query
           name: add_line_1
           description: "Buyer's address line 1"
@@ -86,7 +96,7 @@ paths:
           name: add_line_2
           description: "Buyer's address line 2"
         - schema:
-            type: string
+            type: integer
           in: query
           name: postcode
           description: "Buyer's postcode"
@@ -102,41 +112,50 @@ paths:
           description: "Buyer's additional comments / notes on the purchase"
         - schema:
             type: string
+            format: uri
+            example: 'https://www.example.com/callback'
           in: query
           name: callback_url_be
           description: Callback URL for your back-end process
         - schema:
             type: string
+            example: 'https://www.example.com/callback_success'
           in: query
           name: callback_url_fe_succ
           description: Callback URL for your front-end successful transaction process
         - schema:
             type: string
+            example: 'https://www.example.com/callback_success'
           in: query
           name: callback_url_fe_fail
           description: Callback URL for your front-end failed transaction process
         - schema:
             type: string
+            example: 'variable1|variable2'
           in: query
           name: baggage_variable
-          description: Name of the variablE
+          description: Name of the variable
         - schema:
             type: string
+            example: ''
           in: query
           name: "* variable in baggage_variable *\t"
           description: Value for each variable
         - schema:
             type: string
+            example: Payment Header Title
           in: query
           name: header_title
           description: Modify your company name at payment gateway pages
         - schema:
             type: string
+            example: support@merchant.com
           in: query
           name: header_email
           description: Modify your company email address at payment gateway pages
         - schema:
             type: string
+            example: '+603283928242'
           in: query
           name: header_phone
           description: Modify your company phone number at payment gateway pages
