@@ -19,7 +19,8 @@ paths:
   v1/receiver:
     post:
       summary: Standard Payment Gateway
-      tags: []
+      tags:
+        - standard
       responses:
         '200':
           description: Directly to Payment Gateway
@@ -614,7 +615,6 @@ paths:
   /v1/direct/get_bank_list:
     post:
       summary: Get Bank List
-      tags: []
       responses:
         '200':
           description: Get List of Bank Available
@@ -728,6 +728,8 @@ paths:
             The secure hash string to validate the request sent through our system. Following the format of the hash string is constructed as follows encryption method:
             md5(YOURAPIKEY|merchant_id|type)
           required: true
+      tags:
+        - Direct Payment
 components:
   schemas: {}
   securitySchemes: {}
