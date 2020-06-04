@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: QlicknPay APIs
+  version: '1.0'
+  description: |-
+    Welcome to the QlicknPay API! You can use our API to access QlicknPay API endpoints to start request and collecting payment.
+
+    In order to use the API, you will need to get the following credentials ready. The credentials can be retrieved in QlicknPay Payment Gateway portal, under Manage API Tab. Get your API Key information and Merchant ID as sample below. This information is extremely sensitive. Do not disclose to anyone.
+
+    All API requests must be made over HTTPS. Calls made over plain HTTP will fail. You must authenticate all requests.
+  contact:
+    name: Support
+    url: 'https://www.qlicknpay.com/contact'
+    email: support@qlicknpay.com
+  termsOfService: 'https://www.qlicknpay.com/qlicknpay_agreement.pdf'
+servers:
+  - url: 'https://www.qlicknpay.com/api/'
+paths:
+  /v1/receiver:
+    post:
+      summary: Standard Payment Gateway
+      tags: []
+      responses: {}
+      operationId: post-v1-receiver
+      description: This feature let your payer to directly to QlicknPay Payment Gateway and select payment option provided.
+      parameters:
+        - schema:
+            type: string
+          in: query
+components:
+  schemas: {}
+  securitySchemes: {}
