@@ -611,6 +611,123 @@ paths:
           description: "Buyer's email. Buyer will receive payment notification at this address if specified."
           name: buyer_email
     parameters: []
+  /v1/direct/get_bank_list:
+    post:
+      summary: Get Bank List
+      tags: []
+      responses:
+        '200':
+          description: Get List of Bank Available
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank_name:
+                    type: string
+                    description: Name of Bank
+                  bank_code:
+                    type: string
+                    description: Bank Code
+                  bank_status:
+                    type: string
+                    description: Status of the bank
+              examples:
+                Example:
+                  value:
+                    - '0': Affin Bank
+                      '1': ABB0233
+                      '2': Online
+                    - '0': Alliance Bank (Personal)
+                      '1': ABMB0212
+                      '2': Online
+                    - '0': Bank Islam
+                      '1': BIMB0340
+                      '2': Online
+                    - '0': Bank Rakyat
+                      '1': BKRM0602
+                      '2': Online
+                    - '0': Bank Muamalat
+                      '1': BMMB0341
+                      '2': Online
+                    - '0': BSN
+                      '1': BSN0601
+                      '2': Online
+                    - '0': CIMB Clicks
+                      '1': BCBB0235
+                      '2': Online
+                    - '0': Citibank
+                      '1': CIT0219
+                      '2': Online
+                    - '0': Hong Leong Bank
+                      '1': HLB0224
+                      '2': Online
+                    - '0': HSBC Bank
+                      '1': HSBC0223
+                      '2': Online
+                    - '0': KFH
+                      '1': KFH0346
+                      '2': Online
+                    - '0': Maybank2U
+                      '1': MB2U0227
+                      '2': Online
+                    - '0': Maybank2E
+                      '1': MB2U0227
+                      '2': Online
+                    - '0': OCBC Bank
+                      '1': OCBC0229
+                      '2': Online
+                    - '0': Public Bank
+                      '1': PBB0233
+                      '2': Online
+                    - '0': RHB Bank
+                      '1': RHB0218
+                      '2': Online
+                    - '0': Standard Chartered
+                      '1': SCB0216
+                      '2': Online
+                    - '0': UOB Bank
+                      '1': UOB0226
+                      '2': Online
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  msg:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    reponse: '99'
+                    msg: Verification fail
+      operationId: post-v1-direct-get_bank_list
+      description: This API return list of bank codes for online banking. You require to refer this API in order to proceed with Direct Payment API.
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: merchant_id
+          description: Your merchant ID
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: type
+          description: "Bank List Type. 'b2b' or 'b2c'"
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: hash
+          description: |-
+            The secure hash string to validate the request sent through our system. Following the format of the hash string is constructed as follows encryption method:
+            md5(YOURAPIKEY|merchant_id|type)
+          required: true
 components:
   schemas: {}
   securitySchemes: {}
