@@ -104,6 +104,7 @@ paths:
           description: "Buyer's address line 2"
         - schema:
             type: integer
+            example: 47810
           in: query
           name: postcode
           description: "Buyer's postcode"
@@ -144,12 +145,6 @@ paths:
           in: query
           name: baggage_variable
           description: Name of the variable
-        - schema:
-            type: string
-            example: ''
-          in: query
-          name: "* variable in baggage_variable *\t"
-          description: Value for each variable
         - schema:
             type: string
             example: Payment Header Title
@@ -463,6 +458,158 @@ paths:
           name: hash
           description: 'The secure hash string to validate the request. Hashing format is md5(merchant_id|api|$invoice|method)'
           required: true
+    parameters: []
+  v1/direct/receiver:
+    post:
+      summary: Direct Payment
+      tags:
+        - Direct Payment
+      responses:
+        '200':
+          description: Directly the payer to Bank Portal
+        '400':
+          description: Invalid data requested
+      operationId: post-v1-direct-receiver
+      description: 'Use this feature if you would like to bypass QlicknPay Payment page, and direct payers straight from payment URL to the selected payment gateway seamlessly.'
+      parameters:
+        - schema:
+            type: integer
+            example: 10011
+          in: query
+          name: merchant_id
+          description: Your merchant ID
+          required: true
+        - schema:
+            type: string
+            example: FS789
+            pattern: '^[a-zA-Z0-9]+$'
+          in: query
+          name: invoice
+          description: Unique invoice number
+          required: true
+        - schema:
+            type: number
+            format: float
+            example: 140
+            minimum: 1.5
+          in: query
+          name: amount
+          description: Final amount to be paid by buyer
+          required: true
+        - schema:
+            type: string
+            example: Parking Fee
+          in: query
+          name: payment_desc
+          description: Purpose of payment
+          required: true
+        - schema:
+            type: string
+            example: MB2U0227
+            pattern: '^[a-zA-Z0-9]+$'
+          in: query
+          name: bank_code
+          description: Bank Code. You can get all list of bank code at Get Bank List API
+          required: true
+        - schema:
+            type: string
+            example: b2c
+            pattern: ''
+          in: query
+          name: payment_method
+          description: "Payment Method of the payment. 'B2B' or 'B2C'"
+          required: true
+        - schema:
+            type: string
+            pattern: '^[a-zA-Z0-9]+$'
+            example: fc85b97551f5a2b8bf28d916f2f8055d
+          in: query
+          name: hash
+          description: "The secure hash string to validate the payment request sent through our Payment Gateway. Follwing the format of the hash string is constructed as follows encryption method:\nmd5(YOURAPIKEY|merchant_id|invoice|amount|payment_desc|bank_code|payment_method) "
+          required: true
+        - schema:
+            type: string
+            example: John
+          in: query
+          name: buyer_name
+          description: "Buyer's name"
+        - schema:
+            type: string
+            example: '+0123456789'
+            pattern: "^(\\+?6?01)[0-46-9]-*[0-9]{7,8}$"
+          in: query
+          name: phone
+          description: "Buyer's phone number"
+        - schema:
+            type: string
+            example: '10-3, 3rd Floor Jln PJU 5/9'
+          in: query
+          name: add_line_1
+          description: "Buyer's address line 1"
+        - schema:
+            type: string
+            example: Dataran Sunway Kota Damansara
+          in: query
+          name: add_line_2
+          description: "Buyer's address line 2"
+        - schema:
+            type: string
+            example: '47810'
+          in: query
+          name: postcode
+          description: "Buyer's postcode"
+        - schema:
+            type: string
+            example: Petaling Jaya
+          in: query
+          name: city
+          description: "Buyer's city location"
+        - schema:
+            type: string
+            example: Selangor
+          in: query
+          name: state
+          description: "Buyer's state."
+        - schema:
+            type: string
+            example: Comment Here For Merchant Reference
+          in: query
+          name: comment
+          description: "Buyer's additional comments / notes on the purchase."
+        - schema:
+            type: string
+            format: uri
+            example: 'https://www.example.com/callback_url_be'
+          in: query
+          name: callback_url_be
+          description: Callback URL for your back-end process.
+        - schema:
+            type: string
+            format: uri
+            example: 'https://www.example.com/callback_fe_succ'
+          in: query
+          name: callback_url_fe_succ
+          description: Callback URL for your front-end successful transaction process.
+        - schema:
+            type: string
+            example: 'https://www.example.com/callback_url_fe_fail'
+            format: uri
+          in: query
+          name: callback_url_fe_fail
+          description: Callback URL for your front-end failed transaction process.
+        - schema:
+            type: string
+            example: 'variable1|variable2|variable3|variable4'
+          in: query
+          name: baggage_variable
+          description: Name of the variable
+        - schema:
+            type: string
+            example: John@gmail.com
+            format: email
+          in: query
+          description: "Buyer's email. Buyer will receive payment notification at this address if specified."
+          name: buyer_email
     parameters: []
 components:
   schemas: {}
