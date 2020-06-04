@@ -173,17 +173,37 @@ paths:
         - create_bill
       responses:
         '200':
-          description: |-
-            {
-              "response":"00",
-              "url":"https://www.qlicknpay.com/receiver-disp?34-INV0001-024939-    iXO",
-            }
+          description: Successfully created payment URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  url:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    response: '00'
+                    url: 'https://www.qlicknpay.com/receiver-disp?34-INV0001-024939-iXO'
         '400':
-          description: |-
-            {
-              "response":"99",
-              "msg":"Fail to created bill.",
-            }
+          description: Fail to create payment URL
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  msg:
+                    type: string
+              examples:
+                Example:
+                  value:
+                    response: '99'
+                    msg: Fail to created bill.
       operationId: post-v1-create_bill
       description: 'You can use this API to retrieve specific payment URL. This URL is only for a single payment and no have no time limit. '
       parameters:
