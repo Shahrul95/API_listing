@@ -25,8 +25,121 @@ paths:
       description: This feature let your payer to directly to QlicknPay Payment Gateway and select payment option provided.
       parameters:
         - schema:
+            type: number
+            example: 10001
+          in: query
+          name: merchant_id
+          description: Your merchant ID
+          required: true
+        - schema:
+            type: string
+            pattern: '^[a-zA-Z0-9]+$'
+            example: INV0001
+          in: query
+          name: invoice
+          description: Unique invoice number
+          required: true
+        - schema:
+            type: number
+            format: double
+            minimum: 1.5
+            example: 250
+          in: query
+          name: amount
+          description: Final amount to be paid by buyer
+          required: true
+        - schema:
             type: string
           in: query
+          name: payment_desc
+          description: Purpose of payment
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: hash
+          description: The secure hash string to validate the payment request sent through our Payment Gateway
+          required: true
+        - schema:
+            type: string
+          in: query
+          name: buyer_name
+          description: "Buyer's name"
+        - schema:
+            type: string
+          in: query
+          name: buyer_email
+          description: "Buyer's email. Buyer will receive payment notification at this address if specified"
+        - schema:
+            type: string
+          in: query
+          name: phone
+          description: "Buyer's phone number"
+        - schema:
+            type: string
+          in: query
+          name: add_line_1
+          description: "Buyer's address line 1"
+        - schema:
+            type: string
+          in: query
+          name: add_line_2
+          description: "Buyer's address line 2"
+        - schema:
+            type: string
+          in: query
+          name: postcode
+          description: "Buyer's postcode"
+        - schema:
+            type: string
+          in: query
+          name: city
+          description: "Buyer's city location"
+        - schema:
+            type: string
+          in: query
+          name: comment
+          description: "Buyer's additional comments / notes on the purchase"
+        - schema:
+            type: string
+          in: query
+          name: callback_url_be
+          description: Callback URL for your back-end process
+        - schema:
+            type: string
+          in: query
+          name: callback_url_fe_succ
+          description: Callback URL for your front-end successful transaction process
+        - schema:
+            type: string
+          in: query
+          name: callback_url_fe_fail
+          description: Callback URL for your front-end failed transaction process
+        - schema:
+            type: string
+          in: query
+          name: baggage_variable
+          description: Name of the variablE
+        - schema:
+            type: string
+          in: query
+          name: "* variable in baggage_variable *\t"
+          description: Value for each variable
+        - schema:
+            type: string
+          in: query
+          name: header_title
+          description: Modify your company name at payment gateway pages
+        - schema:
+            type: string
+          in: query
+          name: header_email
+          description: Modify your company email address at payment gateway pages
+        - schema:
+            type: string
+          in: query
+          name: header_phone
+          description: Modify your company phone number at payment gateway pages
 components:
   schemas: {}
   securitySchemes: {}
