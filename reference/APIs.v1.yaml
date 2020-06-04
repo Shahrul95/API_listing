@@ -16,11 +16,17 @@ info:
 servers:
   - url: 'https://www.qlicknpay.com/api/'
 paths:
-  /v1/receiver:
+  v1/receiver:
     post:
       summary: Standard Payment Gateway
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: Directly to Payment Gateway
+        '400':
+          description: Invalid format data entered
+        '401':
+          description: Invalid Merchant ID or API Key
       operationId: post-v1-receiver
       description: This feature let your payer to directly to QlicknPay Payment Gateway and select payment option provided.
       parameters:
@@ -159,6 +165,101 @@ paths:
           in: query
           name: header_phone
           description: Modify your company phone number at payment gateway pages
+    parameters: []
+  v1/create_bill:
+    post:
+      summary: Create Bill
+      tags:
+        - create_bill
+      responses: {}
+      operationId: post-v1-create_bill
+      description: 'You can use this API to retrieve specific payment URL. This URL is only for a single payment and no have no time limit. '
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: merchant_id
+        - schema:
+            type: string
+          in: query
+          name: invoice
+        - schema:
+            type: string
+          in: query
+          name: amount
+        - schema:
+            type: string
+          in: query
+          name: payment_desc
+        - schema:
+            type: string
+          in: query
+          name: hash
+        - schema:
+            type: string
+          in: query
+          name: buyer_name
+        - schema:
+            type: string
+          in: query
+          name: buyer_email
+        - schema:
+            type: string
+          in: query
+          name: phone
+        - schema:
+            type: string
+          in: query
+          name: add_line_1
+        - schema:
+            type: string
+          in: query
+          name: add_line_2
+        - schema:
+            type: string
+          in: query
+          name: postcode
+        - schema:
+            type: string
+          in: query
+          name: city
+        - schema:
+            type: string
+          in: query
+          name: state
+        - schema:
+            type: string
+          in: query
+          name: comment
+        - schema:
+            type: string
+          in: query
+          name: callback_url_be
+        - schema:
+            type: string
+          in: query
+          name: callback_url_fe_succ
+        - schema:
+            type: string
+          in: query
+          name: callback_url_fe_fail
+        - schema:
+            type: string
+          in: query
+          name: baggage_variable
+        - schema:
+            type: string
+          in: query
+          name: 'header_title '
+        - schema:
+            type: string
+          in: query
+          name: header_email
+        - schema:
+            type: string
+          in: query
+          name: header_phone
+    parameters: []
 components:
   schemas: {}
   securitySchemes: {}
