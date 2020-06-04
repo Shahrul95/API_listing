@@ -92,12 +92,13 @@ paths:
           description: "Buyer's phone number"
         - schema:
             type: string
-            example: ''
+            example: '10-3, 3rd Floor Jln PJU 5/9'
           in: query
           name: add_line_1
           description: "Buyer's address line 1"
         - schema:
             type: string
+            example: Dataran Sunway Kota Damansara
           in: query
           name: add_line_2
           description: "Buyer's address line 2"
@@ -108,11 +109,13 @@ paths:
           description: "Buyer's postcode"
         - schema:
             type: string
+            example: Petaling Jaya
           in: query
           name: city
           description: "Buyer's city location"
         - schema:
             type: string
+            example: Comment Here For Merchant Reference
           in: query
           name: comment
           description: "Buyer's additional comments / notes on the purchase"
@@ -181,8 +184,10 @@ paths:
                 properties:
                   response:
                     type: string
+                    description: Response status from QlicknPay
                   url:
                     type: string
+                    description: Payment URL
               examples:
                 Example:
                   value:
@@ -197,8 +202,10 @@ paths:
                 properties:
                   response:
                     type: string
+                    description: Response status from QlicknPay
                   msg:
                     type: string
+                    description: Error messages
               examples:
                 Example:
                   value:
@@ -345,6 +352,117 @@ paths:
           in: query
           name: header_phone
           description: Modify your company phone number at payment gateway pages
+    parameters: []
+  v1/requery:
+    post:
+      summary: Get Payment Status
+      tags:
+        - requery
+      responses:
+        '200':
+          description: Sample response from FPX payment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: Response status from QlicknPay
+                  fpx_fpxTxnTime:
+                    type: string
+                    description: FPX Transaction time
+                  fpx_fpxTxnId:
+                    type: string
+                    description: FPX Transaction ID
+                  fpx_buyerName:
+                    type: string
+                    description: FPX buyer name
+                  fpx_txnCurrency:
+                    type: string
+                    description: FPX Currency
+                  fpx_sellerOrderNo:
+                    type: string
+                    description: FPX Seller Order Number
+                  invoice:
+                    type: string
+                    description: Invoice No
+                  fpx_txnAmount:
+                    type: string
+                    description: Amount
+                  fpx_buyerBankBranch:
+                    type: string
+                    description: Name of the Bank
+                  status_code:
+                    type: string
+                    description: Payment Status Code
+                  status:
+                    type: string
+                    description: Payment Status
+              examples:
+                Example:
+                  value:
+                    response: '00'
+                    fpx_fpxTxnTime: '13 February 2019 9:07PM'
+                    fpx_fpxTxnId: '1902132108200234'
+                    fpx_buyerName: MOHD SHAHRUL IZWAN BIN PU
+                    fpx_txnCurrency: MYR
+                    fpx_sellerOrderNo: 10020-256552-010742-mE
+                    invoice: 10020-256552-010742-mE
+                    fpx_txnAmount: '1.50'
+                    fpx_buyerBankBranch: MAYBANK2U
+                    status_code: '00'
+                    status: Transaction Approved
+        '400':
+          description: Invalid data requested
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: Response status from QlicknPay
+                  msg:
+                    type: string
+                    description: Error messages
+              examples:
+                Example:
+                  value:
+                    response: '99'
+                    msg: Invalid invoice number
+      operationId: post-v1-requery
+      description: "Sometimes, the system may occur a problem where it does not notify the merchant regarding customer's payment status. This features enable merchant to retrieve their transaction status by sending a request to the bank system. Checking transaction status will send an enquiry request to FPX, Mastercard or PayPal."
+      parameters:
+        - schema:
+            type: integer
+            example: 10001
+          in: query
+          name: merchant_id
+          description: Your merchant ID
+          required: true
+        - schema:
+            type: string
+            pattern: '^[a-zA-Z0-9]+$'
+            example: 10011-FS789-20181009-Mt
+          in: query
+          name: invoice
+          description: Your invoice number
+          required: true
+        - schema:
+            type: integer
+            example: '1'
+          in: query
+          name: method
+          description: "Transaction method. Value '1' means payment is using QlicknPay Payment Gateway. Meanwhile, value '2' means payment is using QlicknPay SMS/Email Notification Invoices"
+          required: true
+        - schema:
+            type: string
+            example: fc85b97551f5a2b8bf28d916f2f8055d
+          in: query
+          name: hash
+          description: 'The secure hash string to validate the request. Hashing format is md5(merchant_id|api|$invoice|method)'
+          required: true
     parameters: []
 components:
   schemas: {}
