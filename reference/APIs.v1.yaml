@@ -611,6 +611,12 @@ paths:
           in: query
           description: "Buyer's email. Buyer will receive payment notification at this address if specified."
           name: buyer_email
+        - schema:
+            type: integer
+            example: 1
+          in: query
+          name: skip_receipt
+          description: "Skip QlicknPay receipt page and directly to merchant page. Set '0' as false and '1' as true"
     parameters: []
   /v1/direct/get_bank_list:
     post:
