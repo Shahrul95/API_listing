@@ -19,8 +19,6 @@ paths:
   /v1/receiver:
     post:
       summary: Standard Payment Gateway
-      tags:
-        - standard
       responses:
         '200':
           description: Directly to Payment Gateway
@@ -164,6 +162,8 @@ paths:
           in: query
           name: header_phone
           description: Modify your company phone number at payment gateway pages
+      tags:
+        - Standard
     parameters: []
   /v1/create_bill:
     post:
