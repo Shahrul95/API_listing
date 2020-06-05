@@ -14,9 +14,9 @@ info:
     email: support@qlicknpay.com
   termsOfService: 'https://www.qlicknpay.com/qlicknpay_agreement.pdf'
 servers:
-  - url: 'https://www.qlicknpay.com/merchant/api/'
+  - url: 'https://www.qlicknpay.com/merchant/api'
 paths:
-  v1/receiver:
+  /v1/receiver:
     post:
       summary: Standard Payment Gateway
       tags:
@@ -165,7 +165,7 @@ paths:
           name: header_phone
           description: Modify your company phone number at payment gateway pages
     parameters: []
-  v1/create_bill:
+  /v1/create_bill:
     post:
       summary: Create Bill
       tags:
@@ -349,7 +349,7 @@ paths:
           name: header_phone
           description: Modify your company phone number at payment gateway pages
     parameters: []
-  v1/requery:
+  /v1/requery:
     post:
       summary: Get Payment Status
       tags:
@@ -460,7 +460,7 @@ paths:
           description: 'The secure hash string to validate the request. Hashing format is md5(merchant_id|api|$invoice|method)'
           required: true
     parameters: []
-  v1/direct/receiver:
+  /v1/direct/receiver:
     post:
       summary: Direct Payment
       tags:
@@ -730,6 +730,7 @@ paths:
           required: true
       tags:
         - Direct Payment
+    parameters: []
 components:
   schemas: {}
   securitySchemes: {}
