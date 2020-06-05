@@ -14,7 +14,7 @@ info:
     email: support@qlicknpay.com
   termsOfService: 'https://www.qlicknpay.com/qlicknpay_agreement.pdf'
 servers:
-  - url: 'https://www.qlicknpay.com/api/'
+  - url: 'https://www.qlicknpay.com/merchant/api/'
 paths:
   v1/receiver:
     post:
